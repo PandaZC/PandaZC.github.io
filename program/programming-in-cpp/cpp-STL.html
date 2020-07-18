@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+  <link rel="stylesheet" href="/lib/animate-css/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"github.com","root":"/","scheme":"Gemini","version":"8.0.0-rc.4","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}}};
+  </script>
+
+  <meta name="description" content="前言  顺序容器迭代器及顺序容器介绍 表1.1 标准容器迭代器的运算符     类型 说明    *iter 返回迭代器iter所指元素的引用   iter-&gt;men 解引用iter并获取元素名为mem的成员，等价于(*iter).mem   iter++ 令iter指示容器中的下一个元素   iter– 令iter指示容器中的上一个元素   iter1&#x3D;&#x3D;iter2 判断两个迭代器是否相等">
+<meta property="og:type" content="website">
+<meta property="og:title" content="C++ STL">
+<meta property="og:url" content="https://github.com/PandaZC/PandaZC.github.io/program/programming-in-cpp/cpp-STL.html">
+<meta property="og:site_name" content="TechPanda">
+<meta property="og:description" content="前言  顺序容器迭代器及顺序容器介绍 表1.1 标准容器迭代器的运算符     类型 说明    *iter 返回迭代器iter所指元素的引用   iter-&gt;men 解引用iter并获取元素名为mem的成员，等价于(*iter).mem   iter++ 令iter指示容器中的下一个元素   iter– 令iter指示容器中的上一个元素   iter1&#x3D;&#x3D;iter2 判断两个迭代器是否相等">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github.com/PandaZC/PandaZC.github.io/program/programming-in-cpp/images/C++%E6%A0%87%E5%87%86%E5%BA%93.png">
+<meta property="og:image" content="https://github.com/PandaZC/PandaZC.github.io/program/programming-in-cpp/.%5Cimages%5C%E5%8A%A8%E6%80%81%E6%95%B0%E7%BB%84%E7%A4%BA%E6%84%8F%E5%9B%BE.png">
+<meta property="og:image" content="https://github.com/PandaZC/PandaZC.github.io/program/programming-in-cpp/.%5Cimages%5C%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97%E7%A4%BA%E6%84%8F%E5%9B%BE.png">
+<meta property="og:image" content="https://github.com/PandaZC/PandaZC.github.io/program/programming-in-cpp/images/%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97%E5%AD%98%E5%82%A8%E5%8E%9F%E7%90%86%E7%A4%BA%E6%84%8F%E5%9B%BE.png">
+<meta property="article:published_time" content="2020-07-18T08:00:00.000Z">
+<meta property="article:modified_time" content="2020-07-18T14:51:43.385Z">
+<meta property="article:author" content="PandaZC">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/PandaZC/PandaZC.github.io/program/programming-in-cpp/images/C++%E6%A0%87%E5%87%86%E5%BA%93.png">
+
+<link rel="canonical" href="https://github.com/PandaZC/PandaZC.github.io/program/programming-in-cpp/cpp-STL">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>C++ STL | TechPanda
+</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">TechPanda</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">卑微小张，在线搬砖</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        
+            
+  <li class="menu-item menu-item-program">
+
+    <a href="/program/" rel="section"><i class="fa fa-desktop fa-fw"></i>编程</a>
+
+  </li>
+
+
+      
+        <li class="menu-item menu-item-blog">
+
+    <a href="/blog/" rel="section"><i class="fa fa-share-square fa-fw"></i>博客</a>
+
+  </li>
+        <li class="menu-item menu-item-photo">
+
+    <a href="/photo/" rel="section"><i class="fa fa-camera fa-fw"></i>摄影</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        
+            
+  <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+
+
+      
+  </ul>
+</nav>
+
+
+
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#顺序容器"><span class="nav-number">2.</span> <span class="nav-text">顺序容器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#迭代器及顺序容器介绍"><span class="nav-number">2.1.</span> <span class="nav-text">迭代器及顺序容器介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#string容器-字符串"><span class="nav-number">2.2.</span> <span class="nav-text">string容器 字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vector容器-动态数组"><span class="nav-number">2.3.</span> <span class="nav-text">vector容器 动态数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#vector构造函数"><span class="nav-number">2.3.1.</span> <span class="nav-text">vector构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vector常用赋值操作"><span class="nav-number">2.3.2.</span> <span class="nav-text">vector常用赋值操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vector大小操作"><span class="nav-number">2.3.3.</span> <span class="nav-text">vector大小操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vector数据存取操作"><span class="nav-number">2.3.4.</span> <span class="nav-text">vector数据存取操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vector插入和删除操作"><span class="nav-number">2.3.5.</span> <span class="nav-text">vector插入和删除操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#deque容器-双端队列"><span class="nav-number">2.4.</span> <span class="nav-text">deque容器 双端队列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#deque构造函数"><span class="nav-number">2.4.1.</span> <span class="nav-text">deque构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#deque常用赋值操作"><span class="nav-number">2.4.2.</span> <span class="nav-text">deque常用赋值操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#deque大小操作"><span class="nav-number">2.4.3.</span> <span class="nav-text">deque大小操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#deque数据存取操作"><span class="nav-number">2.4.4.</span> <span class="nav-text">deque数据存取操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#deque插入和删除操作"><span class="nav-number">2.4.5.</span> <span class="nav-text">deque插入和删除操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#list容器-双向链表"><span class="nav-number">2.5.</span> <span class="nav-text">list容器 双向链表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#顺序容器适配器"><span class="nav-number">3.</span> <span class="nav-text">顺序容器适配器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#stack容器-栈"><span class="nav-number">3.1.</span> <span class="nav-text">stack容器 栈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#queue容器-队列"><span class="nav-number">3.2.</span> <span class="nav-text">queue容器 队列</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关联容器"><span class="nav-number">4.</span> <span class="nav-text">关联容器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#set容器"><span class="nav-number">4.1.</span> <span class="nav-text">set容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#map容器"><span class="nav-number">4.2.</span> <span class="nav-text">map容器</span></a></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="PandaZC"
+      src="/images/profiles/%E5%80%94%E5%BC%BA%E7%94%B7%E5%AD%A9.jpg">
+  <p class="site-author-name" itemprop="name">PandaZC</p>
+  <div class="site-description" itemprop="description">张~驰的个人博客</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+      <div class="main-inner">
+        
+  
+
+      
+
+        
+        <ul id="sub-menu" class="sub-menu menu">
+          
+            
+          
+          
+            
+                
+  <li class="menu-item menu-item-configure-ide">
+
+    <a href="/program/configuration-ide/" rel="section"><i class="fa fa-tools fa-fw"></i>开发环境配置</a>
+
+  </li>
+
+
+          
+              
+  <li class="menu-item menu-item-prongramming-in-c">
+
+    <a href="/program/programming-in-c/" rel="section"><i class="fa fa-keyboard fa-fw"></i>C语言程序设计</a>
+
+  </li>
+
+
+          
+          
+            
+                
+  <li class="menu-item menu-item-prongramming-in-cpp">
+
+    <a href="/program/programming-in-cpp/" rel="section"><i class="fa fa-laptop fa-fw"></i>C++程序设计</a>
+
+  </li>
+
+
+          
+              
+  <li class="menu-item menu-item-prongramming-in-python">
+
+    <a href="/program/programming-in-python/" rel="section"><i class="fab fa-python fa-fw"></i>Python程序设计</a>
+
+  </li>
+
+
+          
+        </ul>
+        
+
+        
+
+                
+                
+
+                
+
+                    
+                    <ul id="sub-menu-2" class="sub-menu menu">
+                      
+                        
+  <li class="menu-item menu-item-cpp-basics">
+
+    <a href="/program/programming-in-cpp/cpp-basics.html" rel="section"><i class="fas fa-cubes fa-fw"></i>C++基础</a>
+
+  </li>
+
+
+                        
+  <li class="menu-item menu-item-cpp-advanced">
+
+    <a href="/program/programming-in-cpp/cpp-advanced.html" rel="section"><i class="fas fa-home fa-fw"></i>C++进阶</a>
+
+  </li>
+
+
+                        
+  <li class="menu-item menu-item-cpp-stl">
+
+    <a href="/program/programming-in-cpp/cpp-STL.html" rel="section"><i class="fas fa-warehouse fa-fw"></i>STL模板库</a>
+
+  </li>
+
+
+                    </ul>
+                    
+                
+        
+      
+
+      
+      
+  
+
+        <div class="content page posts-expand">
+          
+
+    
+    
+    
+    <div class="post-block" lang="zh-CN">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">C++ STL
+</h1>
+
+<div class="post-meta">
+  
+  <ul class="breadcrumb">
+          
+            <li><a href="/program/">PROGRAM</a></li>
+            <li><a href="/program/programming-in-cpp/">PROGRAMMING-IN-CPP</a></li>
+            <li>CPP-STL</li>
+          
+  </ul>
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><img src=".\images\C++标准库.png" alt="C++标准库" style="zoom: 33%;" />
+
+<h1 id="顺序容器"><a href="#顺序容器" class="headerlink" title="顺序容器"></a>顺序容器</h1><h2 id="迭代器及顺序容器介绍"><a href="#迭代器及顺序容器介绍" class="headerlink" title="迭代器及顺序容器介绍"></a>迭代器及顺序容器介绍</h2><ul>
+<li>表1.1 标准容器迭代器的运算符</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">类型</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">*iter</td>
+<td align="left">返回迭代器iter所指元素的引用</td>
+</tr>
+<tr>
+<td align="left">iter-&gt;men</td>
+<td align="left">解引用iter并获取元素名为mem的成员，等价于(*iter).mem</td>
+</tr>
+<tr>
+<td align="left">iter++</td>
+<td align="left">令iter指示容器中的下一个元素</td>
+</tr>
+<tr>
+<td align="left">iter–</td>
+<td align="left">令iter指示容器中的上一个元素</td>
+</tr>
+<tr>
+<td align="left">iter1==iter2</td>
+<td align="left">判断两个迭代器是否相等，即是否指示同一个元素</td>
+</tr>
+<tr>
+<td align="left">iter1!=iter2</td>
+<td align="left">判断两个迭代器是否不相等</td>
+</tr>
+</tbody></table>
+<ul>
+<li>表1.2  迭代器支持的运算符补充（适用vector、string、deque和array等容器）</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>iter + n</td>
+<td>迭代器加上一个整数值仍得一个迭代器，迭代器指示的新位置与原来相比向前移动了n个元素</td>
+</tr>
+<tr>
+<td>iter - n</td>
+<td>迭代器减去一个整数值仍得一个迭代器，迭代器指示的新位置与原来相比向后移动了n个元素</td>
+</tr>
+<tr>
+<td>iter += n</td>
+<td>迭代器加法的复合赋值语句</td>
+</tr>
+<tr>
+<td>iter -= n</td>
+<td>迭代器减法的复合赋值语句</td>
+</tr>
+<tr>
+<td>iter1 - iter2</td>
+<td>同一个容器中两个迭代器相减，结果是两个迭代器所指元素之间的距离</td>
+</tr>
+<tr>
+<td>&gt;、&gt;=、&lt;、&lt;=</td>
+<td>迭代器的关系运算符</td>
+</tr>
+</tbody></table>
+<p>特别注意：所有顺序容器都提供了 <u><strong>快速顺序访问</strong></u> 元素的能力。</p>
+<ul>
+<li>表1.3 顺序容器类型</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>顺序容器</th>
+<th>名称</th>
+<th>访问类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>string</td>
+<td>字符串</td>
+<td>快速随机访问</td>
+<td>支持表1.1和表1.2所述的所有运算</td>
+</tr>
+<tr>
+<td>vector</td>
+<td>动态数组</td>
+<td>快速随机访问</td>
+<td>支持表1.1和表1.2所述的所运算</td>
+</tr>
+<tr>
+<td>deque</td>
+<td>双端队列</td>
+<td>快速随机访问</td>
+<td>支持表1.1和表1.2所述的所有运算</td>
+</tr>
+<tr>
+<td>list</td>
+<td>双端链表</td>
+<td>双向顺序访问</td>
+<td>迭代器只重载了++运算符，没有重载+加法运算符，仅支持表1.1所述的迭代器运算</td>
+</tr>
+<tr>
+<td>forward list</td>
+<td>单向链表</td>
+<td>单向顺序访问</td>
+<td>仅支持表1.1所述的除了递减运算符之外的其他迭代器运算</td>
+</tr>
+<tr>
+<td>array</td>
+<td>固定大小数组</td>
+<td>快速随机访问</td>
+<td>支持表1.1和表1.2所述所有迭代器运算</td>
+</tr>
+</tbody></table>
+<p>(1) <strong>快速随机访问</strong>指的是：通过下标运算符[ ]（类重载）访问容器中的元素，访问速度快，但是这种方式有一个缺点，即当访问越界时，程序会直接奔溃；</p>
+<p>另外，可以通过at(int index)方法，返回索引index所指的容器中的数据元素，如果index越界，程序抛出out_of_range异常，这种数据获取的方式更加安全，但at()方法的访问速度相比[ ]较慢。</p>
+<p>(2) <strong>顺序访问</strong>指的是：list双端链表的数据元素并不是保存在连续的内存空间中，list的迭代器中重载了++运算符，即可以通过迭代器（指针）循环操作访问list中的数据元素，但是list禁止通过下标运算符的方式访问数据元素。</p>
+<p>划重点：C ++迭代器用于对数据结构中的元素进行顺序访问或随机访问。因此，对于根据定义不允许顺序或随机访问的数据结构（queue、stack等），迭代器没有任何意义。</p>
+<h2 id="string容器-字符串"><a href="#string容器-字符串" class="headerlink" title="string容器 字符串"></a>string容器 字符串</h2><h2 id="vector容器-动态数组"><a href="#vector容器-动态数组" class="headerlink" title="vector容器 动态数组"></a>vector容器 动态数组</h2><ul>
+<li><p>vector动态数组，vector将元素保存在连续的内存空间中；由于元素是连续存储的，因此通过元素的下标来计算元素地址是非常快速的。</p>
+</li>
+<li><p>vector是单口容器，在尾部插入和删除元素效率很高，在尾部之外的位置插入或删除元素会引起元素的移动，效率低。</p>
+</li>
+<li><p>当vector空间被充满的时候，在插入新的数据元素时，vector会重新申请一块更大的内存空间，将原空间的数据拷贝到新的内存空间，然后释放旧的内存空间，最后将新的数据元素插入到vector中。</p>
+</li>
+</ul>
+<p><img src=".%5Cimages%5C%E5%8A%A8%E6%80%81%E6%95%B0%E7%BB%84%E7%A4%BA%E6%84%8F%E5%9B%BE.png" alt="动态数组示意图"></p>
+<h3 id="vector构造函数"><a href="#vector构造函数" class="headerlink" title="vector构造函数"></a>vector构造函数</h3><ul>
+<li>表2.3.1 vector构造函数</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>vector<T> v;</td>
+<td>默认构造函数，采用模板实现类实现</td>
+</tr>
+<tr>
+<td>vector<T> v(src.begin(), src.end());</td>
+<td>将src[begin(), end())区间中的元素赋给v</td>
+</tr>
+<tr>
+<td>vector<T> v(n, elem);</td>
+<td>将n个elem数据元素赋给v</td>
+</tr>
+<tr>
+<td>vector<T> v(const vector &amp;src);</td>
+<td>拷贝构造函数</td>
+</tr>
+</tbody></table>
+<p>例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[] = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span> &#125;;</span><br><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">v</span><span class="params">(arr, arr + <span class="keyword">sizeof</span>(arr) / <span class="keyword">sizeof</span>(arr[<span class="number">0</span>]))</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="vector常用赋值操作"><a href="#vector常用赋值操作" class="headerlink" title="vector常用赋值操作"></a>vector常用赋值操作</h3><ul>
+<li>表2.3.2 vector常用赋值操作</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>void assign(src.begin(), src.end());</td>
+<td>将src[begin(), end())区间中的元素赋给v</td>
+</tr>
+<tr>
+<td>void assign(int n, T elem);</td>
+<td>将n个elem数据元素赋给v</td>
+</tr>
+<tr>
+<td>vector&amp; operator=(const vector &amp;src);</td>
+<td>重载赋值运算符=</td>
+</tr>
+<tr>
+<td>void swap(vector src);</td>
+<td>将src与v互换</td>
+</tr>
+</tbody></table>
+<p>例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[] = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span> &#125;;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;</span><br><span class="line">v.assign(arr, arr + <span class="keyword">sizeof</span>(arr) / <span class="keyword">sizeof</span>(arr[<span class="number">0</span>]));</span><br></pre></td></tr></table></figure>
+
+<h3 id="vector大小操作"><a href="#vector大小操作" class="headerlink" title="vector大小操作"></a>vector大小操作</h3><ul>
+<li>表2.3.3 vector大小操作</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>size();</td>
+<td>返回容器中元素的个数</td>
+</tr>
+<tr>
+<td>capacity();</td>
+<td>返回容器的容量</td>
+</tr>
+<tr>
+<td>empty();</td>
+<td>判断容器是否为空</td>
+</tr>
+<tr>
+<td>resize(int num);</td>
+<td>重新指定容器的长度为num，若容器变长，则以默认值填充新位置；若容器变短，则删除超出长度的元素</td>
+</tr>
+<tr>
+<td>resize(int num, T elem);</td>
+<td>重新指定容器的长度为num，若容器变长，则以elem值填充新位置；若容器变短，则删除超出长度的元素</td>
+</tr>
+<tr>
+<td>reserve(int len);</td>
+<td>容器预留len个元素长度，预留位置不初始化，不能立即访问</td>
+</tr>
+</tbody></table>
+<h3 id="vector数据存取操作"><a href="#vector数据存取操作" class="headerlink" title="vector数据存取操作"></a>vector数据存取操作</h3><ul>
+<li>表2.3.4 vector数据存取操作</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>at(int index);</td>
+<td>返回索引index所指的数据元素</td>
+</tr>
+<tr>
+<td>operator[](int index);</td>
+<td>返回索引index所指的数据元素</td>
+</tr>
+<tr>
+<td>front();</td>
+<td>返回容器中的第一个数据元素</td>
+</tr>
+<tr>
+<td>back();</td>
+<td>返回容器中的最后一个数据元素</td>
+</tr>
+</tbody></table>
+<h3 id="vector插入和删除操作"><a href="#vector插入和删除操作" class="headerlink" title="vector插入和删除操作"></a>vector插入和删除操作</h3><ul>
+<li>表2.3.5 vector插入和删除操作</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>insert(const_iterator pos, int num, T elem);</td>
+<td>在pos位置插入num个elem数据元素</td>
+</tr>
+<tr>
+<td>push_back(T elem);</td>
+<td>在尾部插入数据元素elem</td>
+</tr>
+<tr>
+<td>pop_back();</td>
+<td>删除尾部最后一个元素</td>
+</tr>
+<tr>
+<td>erase(const_iterator start, const_iterator end);</td>
+<td>删除迭代器[start, end)之间的数据元素</td>
+</tr>
+<tr>
+<td>erase(const_iterator pos);</td>
+<td>删除迭代器pos指向的数据元素</td>
+</tr>
+<tr>
+<td>clear();</td>
+<td>删除容器中的所有数据元素</td>
+</tr>
+</tbody></table>
+<h2 id="deque容器-双端队列"><a href="#deque容器-双端队列" class="headerlink" title="deque容器 双端队列"></a>deque容器 双端队列</h2><ul>
+<li><p>和vector动态数组一样，deque双端队列支持快速随机访问。vector动态数组是单向开口的，deque双端队列是双向开口的，即在deque队尾两端添加或者删除元素的速度都是很快的。</p>
+<p><img src=".%5Cimages%5C%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97%E7%A4%BA%E6%84%8F%E5%9B%BE.png" alt="双端队列"></p>
+</li>
+<li><p>deque双端队列和vector动态数组的差别：</p>
+</li>
+</ul>
+<ol>
+<li>deque双端队列允许常数时间内对头部进行元素插入和删除操作；</li>
+<li>deque双端队列没有容量的概念，原因在于vector动态数组是将数据元素保存在连续的内存空间中，而deque双端队列的数据元素的存储空间是由分段的连续空间组合而成，随时可以增加一段新的空间并链接起来。</li>
+</ol>
+<img src=".\images\双端队列存储原理示意图.png" alt="双端队列存储原理示意图" style="zoom: 33%;" />
+
+<h3 id="deque构造函数"><a href="#deque构造函数" class="headerlink" title="deque构造函数"></a>deque构造函数</h3><ul>
+<li>表2.4.1 deque构造函数</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>deque();</td>
+<td>默认构造函数，采用模板实现类实现</td>
+</tr>
+<tr>
+<td>deque(src.begin(), src.end());</td>
+<td>将src[begin(), end())区间中的元素赋给d</td>
+</tr>
+<tr>
+<td>deque(int n, T elem);</td>
+<td>将n个elem数据元素赋给d</td>
+</tr>
+<tr>
+<td>deque(const deque &amp;src);</td>
+<td>拷贝构造函数</td>
+</tr>
+</tbody></table>
+<h3 id="deque常用赋值操作"><a href="#deque常用赋值操作" class="headerlink" title="deque常用赋值操作"></a>deque常用赋值操作</h3><ul>
+<li>表2.4.2 deque常用赋值操作</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>void assign(src.begin(), src.end());</td>
+<td>将src[begin(), end())区间中的元素赋给d</td>
+</tr>
+<tr>
+<td>void assign(int n, T elem);</td>
+<td>将n个elem数据元素赋给d</td>
+</tr>
+<tr>
+<td>deque &amp; operator=(const deque &amp;src);</td>
+<td>重载赋值运算符=</td>
+</tr>
+<tr>
+<td>swap(deque src);</td>
+<td>将src与d互换</td>
+</tr>
+</tbody></table>
+<h3 id="deque大小操作"><a href="#deque大小操作" class="headerlink" title="deque大小操作"></a>deque大小操作</h3><ul>
+<li>表2.4.3 deque大小操作</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>size();</td>
+<td>返回容器中元素的个数</td>
+</tr>
+<tr>
+<td>empty();</td>
+<td>判断容器是否为空</td>
+</tr>
+<tr>
+<td>resize(int num);</td>
+<td>重新指定容器的长度为num，若容器变长，则以默认值填充新位置；若容器变短，则删除超出长度的元素</td>
+</tr>
+<tr>
+<td>resize(int num, T elem);</td>
+<td>重新指定容器的长度为num，若容器变长，则以elem值填充新位置；若容器变短，则删除超出长度的元素</td>
+</tr>
+</tbody></table>
+<h3 id="deque数据存取操作"><a href="#deque数据存取操作" class="headerlink" title="deque数据存取操作"></a>deque数据存取操作</h3><ul>
+<li>表2.4.4 deque数据存取操作</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>at(int index);</td>
+<td>返回索引index所指的数据元素</td>
+</tr>
+<tr>
+<td>operator[](int index);</td>
+<td>返回索引index所指的数据元素</td>
+</tr>
+<tr>
+<td>front();</td>
+<td>返回容器中的第一个数据元素</td>
+</tr>
+<tr>
+<td>back();</td>
+<td>返回容器中的最后一个数据元素</td>
+</tr>
+</tbody></table>
+<h3 id="deque插入和删除操作"><a href="#deque插入和删除操作" class="headerlink" title="deque插入和删除操作"></a>deque插入和删除操作</h3><ul>
+<li>表2.4.5 deque插入和删除操作</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>push_back(T elem);</td>
+<td>在尾部插入数据元素elem</td>
+</tr>
+<tr>
+<td>push_front(T elem);</td>
+<td>在头部插入数据元素elem</td>
+</tr>
+<tr>
+<td>pop_back();</td>
+<td>删除尾部最后一个元素</td>
+</tr>
+<tr>
+<td>pop_front();</td>
+<td>删除头部第一个元素</td>
+</tr>
+<tr>
+<td>insert(const_iterator pos, int num, T elem);</td>
+<td>在pos位置插入num个elem元素</td>
+</tr>
+<tr>
+<td>insert(const_iterator pos, T elem);</td>
+<td>在pos位置插入elem元素</td>
+</tr>
+<tr>
+<td>insert(const_iterator pos, src.begin(), src.end());</td>
+<td>在pos位置插入src[begin, end)区间的元素</td>
+</tr>
+</tbody></table>
+<h2 id="list容器-双向链表"><a href="#list容器-双向链表" class="headerlink" title="list容器 双向链表"></a>list容器 双向链表</h2><h1 id="顺序容器适配器"><a href="#顺序容器适配器" class="headerlink" title="顺序容器适配器"></a>顺序容器适配器</h1><h2 id="stack容器-栈"><a href="#stack容器-栈" class="headerlink" title="stack容器 栈"></a>stack容器 栈</h2><h2 id="queue容器-队列"><a href="#queue容器-队列" class="headerlink" title="queue容器 队列"></a>queue容器 队列</h2><h1 id="关联容器"><a href="#关联容器" class="headerlink" title="关联容器"></a>关联容器</h1><h2 id="set容器"><a href="#set容器" class="headerlink" title="set容器"></a>set容器</h2><h2 id="map容器"><a href="#map容器" class="headerlink" title="map容器"></a>map容器</h2>
+      </div>
+      
+      
+      
+    </div>
+    
+  <ul class="breadcrumb">
+          
+            <li><a href="/program/">PROGRAM</a></li>
+            <li><a href="/program/programming-in-cpp/">PROGRAMMING-IN-CPP</a></li>
+            <li>CPP-STL</li>
+          
+  </ul>
+
+    
+    
+    
+
+
+        </div>
+        
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">PandaZC</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
