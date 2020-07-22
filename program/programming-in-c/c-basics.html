@@ -22,17 +22,20 @@
     var CONFIG = {"hostname":"github.com","root":"/","scheme":"Gemini","version":"8.0.0-rc.4","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}}};
   </script>
 
-  <meta name="description" content="Here&#39;s something encrypted, password is required to continue reading.">
+  <meta name="description" content="变量C语言基本数据类型数组和指针字符串结构体结构体对齐原则#pragma pack(n)对齐数据结构大小的计算方法： [1]   程序员可以通过预编译命令#pragma pack(n)，n&#x3D;1,2,4,8,16改变对齐系数； [2]   结构体中每个数据都应满足：首地址%min{该数据自身长度，n} &#x3D;0； [3]   整个结构体长度对齐，即：(本条规则为个人总结，程序验证) 结构体总长度%min">
 <meta property="og:type" content="website">
 <meta property="og:title" content="C语言基础">
 <meta property="og:url" content="https://github.com/PandaZC/PandaZC.github.io/program/programming-in-c/c-basics.html">
 <meta property="og:site_name" content="TechPanda">
-<meta property="og:description" content="Here&#39;s something encrypted, password is required to continue reading.">
+<meta property="og:description" content="变量C语言基本数据类型数组和指针字符串结构体结构体对齐原则#pragma pack(n)对齐数据结构大小的计算方法： [1]   程序员可以通过预编译命令#pragma pack(n)，n&#x3D;1,2,4,8,16改变对齐系数； [2]   结构体中每个数据都应满足：首地址%min{该数据自身长度，n} &#x3D;0； [3]   整个结构体长度对齐，即：(本条规则为个人总结，程序验证) 结构体总长度%min">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github.com/PandaZC/PandaZC.github.io/program/programming-in-c/images/%E7%BB%93%E6%9E%84%E4%BD%93%E5%86%85%E5%AD%98%E5%88%86%E5%B8%8301.jpg">
+<meta property="og:image" content="https://github.com/PandaZC/PandaZC.github.io/program/programming-in-c/images/%E7%BB%93%E6%9E%84%E4%BD%93%E5%86%85%E5%AD%98%E5%88%86%E5%B8%8302.jpg">
 <meta property="article:published_time" content="2020-07-17T14:00:00.000Z">
-<meta property="article:modified_time" content="2020-07-22T15:00:55.964Z">
+<meta property="article:modified_time" content="2020-07-22T15:07:51.867Z">
 <meta property="article:author" content="PandaZC">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/PandaZC/PandaZC.github.io/program/programming-in-c/images/%E7%BB%93%E6%9E%84%E4%BD%93%E5%86%85%E5%AD%98%E5%88%86%E5%B8%8301.jpg">
 
 <link rel="canonical" href="https://github.com/PandaZC/PandaZC.github.io/program/programming-in-c/c-basics">
 
@@ -190,7 +193,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -202,6 +205,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#变量"><span class="nav-number">1.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#C语言基本数据类型"><span class="nav-number">1.1.</span> <span class="nav-text">C语言基本数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组和指针"><span class="nav-number">1.2.</span> <span class="nav-text">数组和指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串"><span class="nav-number">1.3.</span> <span class="nav-text">字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结构体"><span class="nav-number">1.4.</span> <span class="nav-text">结构体</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#结构体对齐原则"><span class="nav-number">1.4.1.</span> <span class="nav-text">结构体对齐原则</span></a></li></ol></li></ol></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -386,15 +390,29 @@
       
       
       <div class="post-body">
-          <div id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <div class="hbe-input-container">
-  <input type="password" id="hbePass" placeholder="" />
-    <label for="hbePass">Hey, password is required here.</label>
-    <div class="bottom-line"></div>
-  </div>
-  <script id="hbeData" type="hbeData" data-hmacdigest="6eb1b636334e4b51ca834cb82d5b87d60ea7ba965853b5deee9c869b1b392893">e2f66b957d24b98dcc652f807f78f4e5d450794b2964b5b645fa2e8bbc798722dcd2b6801ec281a5260570362e00cd22b6642e10a56616c176bcf06dd74f61d8003e39cc49e08bffa091a58fcf041b405db58602629335692331e04777a21f84c08643b0b4dc040cc8348fef4b8ae07e476a82254159d03fa9220c25a806bbb3e9b52aacb782862a4090232234e398566151f9d7d42b782436f00661f2119cda7f0b120c8cbd528a106d47dc970a24c134d8c4f93aa6e92cb4081ec9ac24b50ca0ef01b7bdd941bf1cc7882dafe35d820b01f4c282c8ca21a4d160269392d03c393f997c7a468f1eeb101a9d71aaa09fc2ae2fbd7f568c16dbb3e9507055985753f357531f3f5df413b3a56b072a4ff89437c9eddfe79bb621fa4bc094eb1d7478d5fc795f148b6a25294b0db5553436ffd3d26567167c6ff2e042caeeef6a1c5d1ed89b2f9a5b9f5abf5a036a66dc9b3c0075ca63a794631400289572e0cd8e343f0cac00b9dad8929c81a596dcc7344153043c357ce16e9ea71f4f93793b600a8d4cebfec22fe7601ba2c16d1fe57ee177605620bb700cd8e01ae23614b6ec00562e0ee6a0ca555b39cb7aadbe184180161b584495e1c6fa48e378f13524d422013bd534c330c0f339ea740a503ea884177b797f7f16103b11d3833da410c4e523ec0df8eab79e39e06e4eb4d57e65e4a22deef1278b430bc24287b1c59b2ff03530fbe28583c89217da59782eb9ed204bd5bf7a7ccc37b0d7a503cad5850e7bae729bece7a5bfcc4a965f31dd71200263789aa1b8bf5ee389a7b477003886c4592aa03464731d1e79e72b4152f5221f7b0aebc6929660cae08e4f202cd8901004a829498c6d4a3689ecdceb9d632730463677ffa8c11f55d2fceee7369dc6c40542a3f096b08d542fcb7dbc92e6e8c54e2504305399c2db878ce7ed499ebc714ca030e4f3e5bef8f4e0d8d495a5a9d8bd5d37e949391f033e10bff022fee2552b09f8fe76313a522f37bbed54bed114dc24a9f2c239edf12658f629afda3ff4cb4f075fb0ea5c95f7341ef5bb5112997503bcd6a9709ec351a486f0223bf1d0fce44b14afd37f9278770adb9a4e90f53b5b5ee9608f178af968f4b6597db548835706ac0e0830f99e653a61558b05167e1f67643ea33fb4a41b05e26b78bf35e1ff044f6fa8c119fd1a8347dfbc8cbbf79d2165f1ff075973ff72ca6739cd5d42ae30ff75406c55fb90390886a7e5ace83e3a0b8b4c27fcedfbf4e63219e48a1f3a276f7f077b1a99d82002a2a3eaa9fb8697e67cf8ea4148b55fcf245180bd9f9f764babb9dc0692c28e53fe97d6ee3048582097d19a59c05fda05a68e430bb07adb6cd3ffd6e344ba00c0fcb27ee7c1934fbcb6a7aadcd85960afabea44a7b22f2057c6d3e662d99cdd11d2ea13ab0f96b24eb9a163539ad3d734292078e387c6cb796de45a87abaa64573459ddee63ef2e19bbff976c93f976c3db960a5adc8ba8580e80813cf7318db55b77ad07624f91bfa1fbca563bda55a4877dc76de34fa9bea651d0f913c921304c43116c7fbde236c84dd8d28e879583785d28008dabce43877404ecc7cdb8fb7fefe91db63b29de567f656ebe8e684986d38dd1329dca4bc2597bc32261efac64cd6b6dacb12e183c19709876626120dfe4df646f4f3fd64338a0efd58493d18e72d56056fa5f21ff0ae5697551c3fac47103f728ef6d4958c2b3574ef9c765a0d20787169a48fd98af7bea3099e065d8ad446d5f4c576dc3b7a8f2975a193045ffe0541cbd419cdad74306385ac41b4d26221ae45dafd75123d031006187992ad3e8fc9b66faa29f10d2cf7355674c0db97788bb1524e53a9768e9c5e65d2ce39cf528ab9195b86e58a3cdd46e76a7006c1776c11dfa6015d7f74e40ae1fcc4236317e96d694e659fa3f2afd82b50beb2d4766afed7797dbba1f196c4acdde026628a21be0445403a52ce5ee4f2c467d43a3fe6d568c9c07108d8ecb576ab9bc674ea53119209dccd562431459632c71330cf151a3900dad7b44a1308b76b53ce07f3d003c5ac90e0629e0b22e909d1564507b565bf9aa59a1ee7ae5b2cdea6465885e351ba5603bd99de9da944725a2b854728710f0d2426d2d03d343218593e8e31dc78ddf46e8f07ed707c065dcc25e90ab28fe6f4930d1edaea9f3d21b79f0571f19c7e74b5853bdbd963dd0b2d6fbd3473e8b036337c1951c6fddaf8624eaee6f107df40b4a240440d1b4c78157235d0ac9144b808ec398348b3efbae082e37ce5717228c5f014ff520b483556f1d0115866f5c31b5465d83c6c0792633ebe4a9c169fbdda5cb76f2b8fe81c8d9ed7cd22c5d6a1a47ddbd648f448e78096e29f569e75ff57ebdb227b8a8fc52ef452ef5eb6dec74d91bac0954adbeff9ea792a8f097a2b43d583c52ade64d2aa7da693a0ed0b33cc2ee1ba94874ed811bd8b1cef7a1e3edc26488544bad1d6f44d7f9fc6d27d3785f5db70e8e4867bdfd3c60289864cb2096dcae1f2fa33398d82919121dd328f2fd323543a7d6c6b439ea3580f2f0247b029df4f4d9350c6c043cf06b49ec8968813dcb575717e2a0298a7514c701ec3e875b3feebe86a67380b9e29e23e88c4839f2135c429dd4a8b2c21a24cb442ae1e32009be0e2917839ee9732ae3efcd2987b0c00aca77d07542fcedf437108f57a96edd76b3111a7445b8fcf272d5c7faf93a6fde96ce6fb177052de1ee36a75280d85830841d92d45ba2099739780dd54b270a4a1f4fdaf2ad0ccf90337824bbf45fdaf9e9a4a53723bbf380e3b0558843d20f28961983c094cef29a0d7ef93f96135e833f9d1273be0101700fb74c397725d4893ff653abd921dc256354dd026160250fcbdd99f517781c1edb409381e0a7f151c33461570f485f18ac4d2f69e93d295dee1f9ee58818c3b1df9921ea345f9d0a7f6fa908f7589a9a01ddd21708d98acf6813f6f9f819e1c252185e45046ba233ac2041b2140c5c833e42e87b9f1d0d00904da6713124c591ef06528080ee4d6b0a2f3bf66066541b8223828ec2fd484377a81bfa4e9e70556b356f8a65bac2efe16d70104b23488a37b68aaab2119fa4ec0402820d3b48ade6888fc0d7db7160822e6f14c9bfafc4a169cbf9a0e98b4c90ff2b4f64b33138b1005d45ae27653f793b88a04c6762e346edc78305c34334f0d544d393a4ae784a60b492150bed3ddf0e2774936552ada320ea28386567e8d0841d60732b454c961e917892be4004ed853e68bf4f11da724c1c025b1b236ec8507db652b20f5c3cd28e0aba592dfb09b507ffa81e6da5cf9d46402070fa171e4e4db6d0575231f28aea2530c61ab3adee553785833e1ac47700ceb88fd6721a499a7f9f70a675fb084bcb90778e895fb7c4a229c1b0bdf611c6617888565a5245b78ff8d069e2a2b4a546821dc7898c37b06731ab42210c885fd55cbd27f5967f9c4bf4fe7769fb15141d10720ec53142cf314e32647043e0df87bf7fd192bc0c908ec0c384a7e7189ad530ebd7518d00702c56a05497f66ceca5cb312a8a2136bd6b5f8c5e232c428109796d68dadff321ea1b1185cb6924943a37cb3d124c4c28f8d8bd304a3c4947a36cf00ab56fc312abe142faf9b105d3b7d41ebe6c8030fe93afab1b8e0088a033528c9bfd919d3fb30d491ccf3955d50c33cb15509e7f82de32986a1d0f67d5005775fa81c30ccaa11c20610ffda1a3f53826af82259b4c48ad79cded1cb570edb3376ffcd51a09907b972c2902c7faa193f771093c4eb17735c7330c842f669efaa8cca88bdbec9efbbab9</script>
-</div>
-<script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">
+          <h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><h2 id="C语言基本数据类型"><a href="#C语言基本数据类型" class="headerlink" title="C语言基本数据类型"></a>C语言基本数据类型</h2><h2 id="数组和指针"><a href="#数组和指针" class="headerlink" title="数组和指针"></a>数组和指针</h2><h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><h2 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h2><h3 id="结构体对齐原则"><a href="#结构体对齐原则" class="headerlink" title="结构体对齐原则"></a>结构体对齐原则</h3><p>#pragma pack(<em>n</em>)对齐数据结构大小的计算方法：</p>
+<p>[1]   程序员可以通过预编译命令#pragma pack(<em>n</em>)，<em>n</em>=1,2,4,8,16改变对齐系数；</p>
+<p>[2]   结构体中每个数据都应满足：首地址%min{该数据自身长度，<em>n</em>} =0；</p>
+<p>[3]   整个结构体长度对齐，即：(本条规则为个人总结，程序验证) 结构体总长度%min{ max{结构体中占用内存最大的数据类型的长度}，<em>n</em> } =0；</p>
+<p>例：struct Data数据元素在内存中的分布情况（以32位平台为例）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Data</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span> a;  </span><br><span class="line">    short b;  </span><br><span class="line">    <span class="keyword">int</span> c;  </span><br><span class="line">    <span class="keyword">double</span> d;  </span><br><span class="line">    <span class="keyword">char</span> e;  </span><br><span class="line">    <span class="keyword">char</span> f;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不同情形下Data元素在内存中的分布情况</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">#pragma pack(2)</th>
+<th align="center">#pragma pack(4)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src=".\images\结构体内存分布01.jpg" alt="结构体内存分布01" style="zoom:25%;" /></td>
+<td align="center"><img src=".\images\结构体内存分布02.jpg" alt="结构体内存分布02" style="zoom:25%;" /></td>
+</tr>
+</tbody></table>
+
       </div>
       
       
