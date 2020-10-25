@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://github.com/PandaZC/PandaZC.github.io/development/Linux/images/Linux%E5%9F%BA%E7%A1%80%E6%8C%87%E4%BB%A4.jpg">
 <meta property="og:image" content="https://github.com/PandaZC/PandaZC.github.io/development/Linux/images/Linux%E8%BF%9B%E9%98%B6%E6%8C%87%E4%BB%A4.jpg">
 <meta property="article:published_time" content="2020-08-02T13:00:00.000Z">
-<meta property="article:modified_time" content="2020-08-02T13:15:28.127Z">
+<meta property="article:modified_time" content="2020-10-25T11:59:15.128Z">
 <meta property="article:author" content="PandaZC">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://github.com/PandaZC/PandaZC.github.io/development/Linux/images/Linux%E5%9F%BA%E7%A1%80%E6%8C%87%E4%BB%A4.jpg">
@@ -215,7 +215,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux介绍"><span class="nav-number">1.</span> <span class="nav-text">Linux介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux常用指令"><span class="nav-number">2.</span> <span class="nav-text">Linux常用指令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux基础指令"><span class="nav-number">2.1.</span> <span class="nav-text">Linux基础指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux进阶指令"><span class="nav-number">2.2.</span> <span class="nav-text">Linux进阶指令</span></a></li></ol></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux介绍"><span class="nav-number">1.</span> <span class="nav-text">Linux介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux常用指令"><span class="nav-number">2.</span> <span class="nav-text">Linux常用指令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux基础指令"><span class="nav-number">2.1.</span> <span class="nav-text">Linux基础指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux进阶指令"><span class="nav-number">2.2.</span> <span class="nav-text">Linux进阶指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux主要目录速查表"><span class="nav-number">2.3.</span> <span class="nav-text">Linux主要目录速查表</span></a></li></ol></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -419,6 +419,37 @@
 <h1 id="Linux常用指令"><a href="#Linux常用指令" class="headerlink" title="Linux常用指令"></a>Linux常用指令</h1><h2 id="Linux基础指令"><a href="#Linux基础指令" class="headerlink" title="Linux基础指令"></a>Linux基础指令</h2><img src=".\images\Linux基础指令.jpg" alt="Linux基础指令" style="zoom: 33%;" />
 
 <h2 id="Linux进阶指令"><a href="#Linux进阶指令" class="headerlink" title="Linux进阶指令"></a>Linux进阶指令</h2><img src=".\images\Linux进阶指令.jpg" alt="Linux进阶指令" style="zoom:33%;" />
+
+<h2 id="Linux主要目录速查表"><a href="#Linux主要目录速查表" class="headerlink" title="Linux主要目录速查表"></a>Linux主要目录速查表</h2><ul>
+<li><p>/：根目录，一般根目录下只存放目录，在Linux下有且只有一个根目录，所有的东西都是从这里开始；</p>
+<p>例如，当在终端中输入/home，其实是在告诉电脑，先从/（根目录）开始，然后进入到home目录。</p>
+</li>
+<li><p>/bin、/usr/bin：可执行二进制文件的目录，如常用的命令：ls、tar、mv、cat等；</p>
+</li>
+<li><p>/boot：放置Linux系统启动时用到的一些文件，如Linux内核文件：/boot/vnUnuz；系统引导管理器：/boot/grub；</p>
+</li>
+<li><p>/dev：存放Linux系统下的设备文件，访问该目录下的某个文件，相当于访问某个设备，常见的是挂载光驱：<code>iiount /dev/cdron/mnt</code>；</p>
+</li>
+<li><p>/etc：系统配置文件存放的目录，不建议在此目录下存放可执行文件，重要的配置文件有：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/etc/inittab</span><br><span class="line">/etc/fstab</span><br><span class="line">/etc/initd</span><br><span class="line">/etc/Xll</span><br><span class="line">/etc/sysconfig</span><br><span class="line">/etc/xinetd.d</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>/home：系统默认的用户家目录，新增用户账号时，用户的家目录都存放在此目录下；</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~表示当前用户的家目录，例如：<span class="built_in">cd</span> ~</span><br><span class="line">^edu表示用户edu的家目录</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>/lib、/usr/lib、/usr/local/lib：系统使用的库函数目录，程序在执行过程中，需要调用一些额外的参数时，需要函数库的协助；</p>
+</li>
+<li><p>/lost+fount：系统异常产生错误时，会将一些遗失的片段放置在此目录下；</p>
+</li>
+<li><p>/mnt/media：光盘的默认挂载点，通常光盘挂载于/mnt/cdrom目录下，但也不一定，光盘可以选择任意位置进行挂载；</p>
+</li>
+<li><p>/opt：给主机额外安装软件所摆放的目录；</p>
+</li>
+<li><p>/proc：此目录的数据都在内存中，如系统核心、外部设备、网路状态等，由于数据都存放在内存中，所以不占用磁盘空间；</p>
+</li>
+<li><p>/root：系统管理员root的家目录</p>
+</li>
+</ul>
+
       </div>
       
       
