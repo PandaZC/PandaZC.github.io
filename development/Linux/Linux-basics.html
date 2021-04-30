@@ -30,9 +30,16 @@
 <meta property="og:description" content="Linux介绍 Linux的前身——Unix 1970年，Unix诞生，因此，1970年被称为Unix元年。 Unix时间戳：指从1970年1月1日0时0分0秒开始，到现在所经过的秒数（不包括闰秒）。    Linux的诞生：1991年 李纳斯·托瓦兹——Linux之父 1992年，Linux加入GNU计划（GNU is NOT UNIX），更名为GNU&#x2F;Linux    Linux系统的特点：开">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://github.com/PandaZC/PandaZC.github.io/development/Linux/images/Linux%E5%9F%BA%E7%A1%80%E6%8C%87%E4%BB%A4.jpg">
+<meta property="og:image" content="https://github.com/PandaZC/PandaZC.github.io/development/Linux/.%5Cimages%5Cgrep%E6%8C%87%E4%BB%A4%E6%93%8D%E4%BD%9C%E6%BC%94%E7%A4%BA.png">
+<meta property="og:image" content="https://github.com/PandaZC/PandaZC.github.io/development/Linux/.%5Cimages%5Cgrep%E6%8C%87%E4%BB%A4%E6%A8%A1%E5%BC%8F%E6%9F%A5%E6%89%BE.png">
+<meta property="og:image" content="f:%5CBlogSpace%5CTechPandaBlog%5Csource%5Cdevelopment%5CLinux%5Cimages%5Cscp%E6%8C%87%E4%BB%A4%E6%93%8D%E4%BD%9C%E6%BC%94%E7%A4%BA.png">
+<meta property="og:image" content="https://github.com/PandaZC/PandaZC.github.io/development/Linux/.%5Cimages%5Cecho%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B.png">
+<meta property="og:image" content="https://github.com/PandaZC/PandaZC.github.io/development/Linux/.%5Cimages%5C%E9%87%8D%E5%AE%9A%E5%90%91%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B.png">
+<meta property="og:image" content="https://github.com/PandaZC/PandaZC.github.io/development/Linux/.%5Cimages%5C%E7%AE%A1%E9%81%93%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B1.png">
+<meta property="og:image" content="https://github.com/PandaZC/PandaZC.github.io/development/Linux/.%5Cimages%5C%E7%AE%A1%E9%81%93%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B2.png">
 <meta property="og:image" content="https://github.com/PandaZC/PandaZC.github.io/development/Linux/images/Linux%E8%BF%9B%E9%98%B6%E6%8C%87%E4%BB%A4.jpg">
 <meta property="article:published_time" content="2020-08-02T13:00:00.000Z">
-<meta property="article:modified_time" content="2020-10-25T11:59:15.128Z">
+<meta property="article:modified_time" content="2020-11-04T14:26:20.605Z">
 <meta property="article:author" content="PandaZC">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://github.com/PandaZC/PandaZC.github.io/development/Linux/images/Linux%E5%9F%BA%E7%A1%80%E6%8C%87%E4%BB%A4.jpg">
@@ -215,7 +222,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux介绍"><span class="nav-number">1.</span> <span class="nav-text">Linux介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux常用指令"><span class="nav-number">2.</span> <span class="nav-text">Linux常用指令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux基础指令"><span class="nav-number">2.1.</span> <span class="nav-text">Linux基础指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux进阶指令"><span class="nav-number">2.2.</span> <span class="nav-text">Linux进阶指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux主要目录速查表"><span class="nav-number">2.3.</span> <span class="nav-text">Linux主要目录速查表</span></a></li></ol></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux介绍"><span class="nav-number">1.</span> <span class="nav-text">Linux介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux常用指令"><span class="nav-number">2.</span> <span class="nav-text">Linux常用指令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux基础指令"><span class="nav-number">2.1.</span> <span class="nav-text">Linux基础指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看文件内容相关指令"><span class="nav-number">2.1.1.</span> <span class="nav-text">查看文件内容相关指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#远程管理常用命令"><span class="nav-number">2.1.2.</span> <span class="nav-text">远程管理常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他指令"><span class="nav-number">2.1.3.</span> <span class="nav-text">其他指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux进阶指令"><span class="nav-number">2.2.</span> <span class="nav-text">Linux进阶指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux主要目录速查表"><span class="nav-number">2.3.</span> <span class="nav-text">Linux主要目录速查表</span></a></li></ol></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -418,6 +425,327 @@
 </ul>
 <h1 id="Linux常用指令"><a href="#Linux常用指令" class="headerlink" title="Linux常用指令"></a>Linux常用指令</h1><h2 id="Linux基础指令"><a href="#Linux基础指令" class="headerlink" title="Linux基础指令"></a>Linux基础指令</h2><img src=".\images\Linux基础指令.jpg" alt="Linux基础指令" style="zoom: 33%;" />
 
+<ul>
+<li><p><font color="#4682B4" size="5px" face="楷体">ls指令：</font></p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-l</td>
+<td></td>
+</tr>
+<tr>
+<td>-a</td>
+<td></td>
+</tr>
+<tr>
+<td>-h</td>
+<td></td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<ul>
+<li><p><font color="#4682B4" size="5px" face="楷体">cd指令：切换目录</font></p>
+</li>
+<li><p><font color="#4682B4" size="5px" face="楷体">pwd指令：打印当前目录</font></p>
+</li>
+<li><p><font color="#4682B4" size="5px" face="楷体">touch指令：创建文件或者修改文件时间</font></p>
+<ul>
+<li>如果文件不存在，可以创建一个空白文件 </li>
+<li>如果文件已经存在，可以更新文件的末次修改时间</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><font color="#4682B4" size="5px" face="楷体">mkdir指令：创建一个新的目录</font></p>
+<table>
+<thead>
+<tr>
+<th>-p</th>
+<th>递归创建目录</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>选项</td>
+<td>含义</td>
+</tr>
+</tbody></table>
+<p>使用示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir -p newfile/hello/world</span><br></pre></td></tr></table></figure>
+
+<p><font color="#ff0000">注意事项：</font>在linux环境下，不能使用touch指令和mkdir指令在同一目录下创建同名文件/目录</p>
+</li>
+</ul>
+<ul>
+<li><p><font color="#4682B4" size="5px" face="楷体">rm指令：删除文件或者目录</font></p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-f</td>
+<td>强制删除，忽略不存在的文件，无需提示</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>递归删除目录下的内容，删除文件夹时必须加此参数</td>
+</tr>
+</tbody></table>
+<p><font color="#ff0000">注意事项：</font>使用rm指令，文件删除后不能恢复</p>
+</li>
+</ul>
+<ul>
+<li><p><font color="#4682B4" size="5px" face="楷体">tree指令：以树状图列出文件目录结构</font></p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-d</td>
+<td>只显示目录，不显示文件</td>
+</tr>
+</tbody></table>
+<p><font color="#ff0000">注意事项：</font>linux系统可能默认不支持tree指令，使用如下命令安装<code>sudo apt-get install tree</code></p>
+</li>
+</ul>
+<ul>
+<li><p><font color="#4682B4" size="5px" face="楷体">cp指令：将指定文件或目录拷贝到另一个文件或目录中</font></p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-i</td>
+<td>覆盖文件前提示</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>若给出的源文件是目录型文件，则cp指令将递归复制该目录下的所有目录和文件，目标文件必须是一个目录名</td>
+</tr>
+</tbody></table>
+<p>使用示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cp readme.md /usr/<span class="built_in">local</span>/uci/code/test.md <span class="comment"># 拷贝并修改文件名</span></span><br><span class="line">$ cp readme.md /usr/<span class="built_in">local</span>/uci/code <span class="comment"># 拷贝不修改文件名，只需指定目标路径</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p><font color="#4682B4" size="5px" face="楷体">mv指令：移动文件或目录，也可以给文件目录重命名</font></p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-i</td>
+<td>覆盖文件前提示</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h3 id="查看文件内容相关指令"><a href="#查看文件内容相关指令" class="headerlink" title="查看文件内容相关指令"></a>查看文件内容相关指令</h3><ul>
+<li><p><font color="#4682B4" size="5px" face="楷体">cat指令：cancatenate</font></p>
+<p>用于查看文件内容、创建文件、文件合并、追加文件内容等操作</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-b</td>
+<td>对非空输出行编号</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>对输出所有行编号</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<ul>
+<li><p><font color="#4682B4" size="5px" face="楷体">more指令</font></p>
+<p>用于分屏显示文件内容</p>
+<table>
+<thead>
+<tr>
+<th>操作键</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>空格键<space></td>
+<td>显示文件下一屏的内容</td>
+</tr>
+<tr>
+<td>回车键<enter></td>
+<td>滚动输出文件下一行的内容</td>
+</tr>
+<tr>
+<td>b</td>
+<td>回滚到上一屏内容</td>
+</tr>
+<tr>
+<td>f</td>
+<td>前滚下一屏</td>
+</tr>
+<tr>
+<td>q</td>
+<td>退出</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<ul>
+<li><p><font color="#4682B4" size="5px" face="楷体">grep指令</font></p>
+<p>用于搜索文本文件内容，grep [搜索内容] [源文件]</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-n</td>
+<td>显示匹配行及行号</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>显示不包含匹配内容的所有行（相当于求反）</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>忽略大小写</td>
+</tr>
+</tbody></table>
+<p><img src=".%5Cimages%5Cgrep%E6%8C%87%E4%BB%A4%E6%93%8D%E4%BD%9C%E6%BC%94%E7%A4%BA.png" alt="grep指令操作演示"></p>
+<p>使用示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ grep <span class="string">"Hello world"</span> Hello.cpp <span class="comment"># 用引号将带空格的搜索目标包含在一起</span></span><br></pre></td></tr></table></figure>
+
+<p>特别地，grep指令具有<strong>模式查找</strong>功能：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>^a</td>
+<td>行首，搜索以a开头的行</td>
+</tr>
+<tr>
+<td>ke$</td>
+<td>行尾，搜索以ke结尾的行</td>
+</tr>
+</tbody></table>
+<p><img src=".%5Cimages%5Cgrep%E6%8C%87%E4%BB%A4%E6%A8%A1%E5%BC%8F%E6%9F%A5%E6%89%BE.png" alt="grep指令模式查找"></p>
+</li>
+</ul>
+<h3 id="远程管理常用命令"><a href="#远程管理常用命令" class="headerlink" title="远程管理常用命令"></a>远程管理常用命令</h3><ul>
+<li><p><font color="#4682B4" size="5px" face="楷体">关机/重启</font></p>
+<ul>
+<li>shutdowm</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-r</td>
+<td>重新启动</td>
+</tr>
+<tr>
+<td>-c</td>
+<td>取消关机/重启计划</td>
+</tr>
+</tbody></table>
+</li>
+<li><p><font color="#4682B4" size="5px" face="楷体">常看或配置网卡信息</font></p>
+<ul>
+<li>ifconfig</li>
+<li>ping</li>
+</ul>
+</li>
+<li><p><font color="#4682B4" size="5px" face="楷体">远程登录和复制文件</font></p>
+<ul>
+<li><p><font color="#0000ff" size="5px" face="楷体">ssh指令</font></p>
+<p>命令格式：<code>ssh [-p port] user@remote</code></p>
+<p>&gt; user是远程机器上的用户名，如果不指定的话就默认为当前用户；</p>
+<p>&gt; remote为远程机器的地址，可以是ip/域名，或者是别名；</p>
+<p>&gt; port是SSH Server监听端口号，如果不指定，默认值22，-p选项是<font color="#FF0000">小写</font>；</p>
+<p>注意：ssh终端命令只能在Linux或者UNIX系统下使用</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><font color="#0000ff" size="5px" face="楷体">scp指令</font></p>
+<p>命令格式：<code>scp [-P port] [-r] src user@remote:dest</code></p>
+<p>&gt; port是SSH Server监听端口号，如果不指定，默认值22，-P选项是<font color="#FF0000">大写</font>；</p>
+<p>&gt; src是源文件路径</p>
+<p>&gt; : 后面的路径dest如果不是绝对路径，则以用户的家目录作为参考路径</p>
+<p><img src="F:%5CBlogSpace%5CTechPandaBlog%5Csource%5Cdevelopment%5CLinux%5Cimages%5Cscp%E6%8C%87%E4%BB%A4%E6%93%8D%E4%BD%9C%E6%BC%94%E7%A4%BA.png" alt="scp指令操作演示"></p>
+</li>
+</ul>
+<h3 id="其他指令"><a href="#其他指令" class="headerlink" title="其他指令"></a>其他指令</h3><ul>
+<li><p><font color="#4682B4" size="5px" face="楷体">echo指令</font></p>
+<p>echo会在终端中显示参数指定的文字，一般会和重定向联合使用</p>
+<p><img src=".%5Cimages%5Cecho%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B.png" alt="echo使用示例"></p>
+</li>
+</ul>
+<ul>
+<li><p><font color="#4682B4" size="5px" face="楷体">重定向&gt;和&gt;&gt;</font></p>
+<ul>
+<li>Linux允许将命令执行结果重定向到一个文件</li>
+<li>将本应显示在终端上的内容<strong>输出/追加</strong>到指定文件中</li>
+</ul>
+<p>其中，</p>
+<ul>
+<li>&gt;表示输出，会<font color="#ff0000">覆盖</font>文件原有的内容</li>
+<li>&gt;&gt;表示追加，会将内容<font color="#ff0000">追加</font>到已有文件的末尾</li>
+</ul>
+<p><img src=".%5Cimages%5C%E9%87%8D%E5%AE%9A%E5%90%91%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B.png" alt="重定向使用示例"></p>
+</li>
+</ul>
+<ul>
+<li><p><font color="#4682B4" size="5px" face="楷体">管道|</font></p>
+<ul>
+<li>Linux允许将一个<strong>命令的输出</strong>通过<strong>管道</strong>作为另一个<strong>命令的输入</strong></li>
+</ul>
+<p>常用的管道命令有：</p>
+<ul>
+<li>more：分屏显示内容</li>
+</ul>
+<p><img src=".%5Cimages%5C%E7%AE%A1%E9%81%93%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B1.png" alt="管道使用示例1"></p>
+<ul>
+<li>grep：在命令执行结果的基础上查询指定的文本</li>
+</ul>
+<p><img src=".%5Cimages%5C%E7%AE%A1%E9%81%93%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B2.png" alt="管道使用示例1"></p>
+</li>
+</ul>
 <h2 id="Linux进阶指令"><a href="#Linux进阶指令" class="headerlink" title="Linux进阶指令"></a>Linux进阶指令</h2><img src=".\images\Linux进阶指令.jpg" alt="Linux进阶指令" style="zoom:33%;" />
 
 <h2 id="Linux主要目录速查表"><a href="#Linux主要目录速查表" class="headerlink" title="Linux主要目录速查表"></a>Linux主要目录速查表</h2><ul>
@@ -506,7 +834,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
